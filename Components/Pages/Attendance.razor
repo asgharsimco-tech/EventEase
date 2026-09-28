@@ -1,0 +1,22 @@
+@page "/attendance"
+@inject EventStore Store
+<PageTitle>Attendance | EventEase</PageTitle>
+<p class="eyebrow">KEEP EVERY CHECK-IN ORGANISED</p><h1>Attendance tracker</h1>
+<p>Manage registrations created in this browser session.</p>
+<div class="stats"><div><strong>@Selected.Count</strong> Registered</div><div><strong>@Selected.Count(r => r.Attended)</strong> Checked in</div><div><strong>@Selected.Count(r => !r.Attended)</strong> Awaiting arrival</div></div>
+<label class="search">Filter by event<select @bind="eventId"><option value="0">All events</option>
+@foreach (var item in Store.Events) { <option value="@item.Id">@item.Name</option> }
+</select></label>
+@if (Selected.Count == 0) { <section class="panel"><h2>No registrations yet</h2><p>Register for an event to start tracking attendance.</p><a class="button" href="/">Browse events</a></section> }
+else {
+<div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Event</th><th>Attendance</th></tr></thead><tbody>
+@foreach (var person in Selected) {
+<tr @key="person.Id"><td>@person.FullName</td><td>@person.Email</td><td>@Store.Find(person.EventId)?.Name</td>
+<td><label class="check"><input type="checkbox" checked="@person.Attended" @onchange="e => Store.SetAttendance(person.Id, e.Value is bool value && value)" />@(person.Attended ? "Checked in" : "Not checked in")</label></td></tr>
+}
+</tbody></table></div>
+}
+@code {
+    private int eventId;
+    private List<Registration> Selected => Store.Registrations.Where(r => eventId == 0 || r.EventId == eventId).ToList();
+}

@@ -1,0 +1,28 @@
+@page "/register/{Id:int}"
+@inject EventStore Store
+@inject UserSession Session
+<PageTitle>Registration | EventEase</PageTitle>
+@if (item is null) { <MissingPage /> }
+else {
+    <section class="panel narrow"><p class="eyebrow">RESERVE YOUR PLACE</p><h1>Registration</h1><h2>@item.Name</h2>
+    @if (success) {
+        <div class="success" role="status">Your registration is confirmed, @Session.FullName.</div>
+        <div class="actions"><a class="button" href="attendance">View attendance</a><a href="/">Explore more events</a></div>
+    } else {
+        @if (error is not null) { <p class="error" role="alert">@error</p> }
+        <RegistrationForm EventId="Id" InitialName="@Session.FullName" InitialEmail="@Session.Email" OnRegister="Save" />
+    }
+    </section>
+}
+@code {
+    [Parameter] public int Id { get; set; }
+    private EventItem? item;
+    private bool success;
+    private string? error;
+    protected override void OnParametersSet() { item = Store.Find(Id); success = false; error = null; }
+    private void Save(Registration registration) {
+        error = Store.Register(registration);
+        if (error is not null) return;
+        Session.FullName = registration.FullName; Session.Email = registration.Email; success = true;
+    }
+}

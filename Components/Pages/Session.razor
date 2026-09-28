@@ -1,0 +1,9 @@
+@page "/session"
+@inject UserSession User
+<PageTitle>My session | EventEase</PageTitle>
+<section class="panel narrow"><p class="eyebrow">YOUR CURRENT VISIT</p><h1>My session</h1>
+@if (User.HasProfile) {
+<p><strong>@User.FullName</strong><br />@User.Email</p>
+<p>Your details automatically fill the next registration form.</p><button @onclick="User.Clear">Clear saved profile</button>
+} else { <p>No profile is saved yet. Register for an event to save your details for this visit.</p><a class="button" href="/">Browse events</a> }
+<p class="muted">This is a demonstration session, not a login. Navigation preserves data; refreshing, closing the browser, or restarting the app resets it. Clearing the profile does not remove registrations.</p></section>

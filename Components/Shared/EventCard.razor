@@ -1,0 +1,35 @@
+<article class="card">
+    <p class="eyebrow">@Event.Date.ToString("dd MMM yyyy")</p>
+    <h2>@Event.Name</h2>
+    <p class="location">@Event.Location</p>
+    <p>@Event.Description</p>
+    <p class="muted">@Registered / @Event.Capacity places booked</p>
+    <div class="actions"><a class="button" href="@($"/events/{Event.Id}")">View event</a>
+    <button class="secondary" @onclick="StartEdit">Edit event</button></div>
+    @if (editing)
+    {
+        <EditForm Model="draft" OnValidSubmit="Save" FormName="event-editor">
+            <DataAnnotationsValidator /><ValidationSummary />
+            <label>Name<InputText @bind-Value="draft.Name" /></label>
+            <label>Location<InputText @bind-Value="draft.Location" /></label>
+            <label>Date<InputDate @bind-Value="draft.Date" /></label>
+            <div class="actions"><button type="submit">Save changes</button>
+            <button type="button" class="secondary" @onclick="Cancel">Cancel</button></div>
+        </EditForm>
+    }
+</article>
+@code {
+    [Parameter, EditorRequired] public EventItem Event { get; set; } = default!;
+    [Parameter] public int Registered { get; set; }
+    private bool editing;
+    private EventItem draft = new();
+    private void StartEdit() {
+        draft = new EventItem { Name = Event.Name, Location = Event.Location, Date = Event.Date };
+        editing = true;
+    }
+    private void Cancel() => editing = false;
+    private void Save() {
+        Event.Name = draft.Name.Trim(); Event.Location = draft.Location.Trim(); Event.Date = draft.Date;
+        editing = false;
+    }
+}

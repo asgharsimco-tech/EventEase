@@ -1,0 +1,22 @@
+<EditForm Model="model" OnValidSubmit="Submit" FormName="registration">
+    <DataAnnotationsValidator /><ValidationSummary />
+    <label>Full name<InputText @bind-Value="model.FullName" autocomplete="name" /></label>
+    <ValidationMessage For="@(() => model.FullName)" />
+    <label>Email address<InputText @bind-Value="model.Email" autocomplete="email" /></label>
+    <ValidationMessage For="@(() => model.Email)" />
+    <button type="submit">Confirm registration</button>
+</EditForm>
+@code {
+    [Parameter] public int EventId { get; set; }
+    [Parameter] public string InitialName { get; set; } = "";
+    [Parameter] public string InitialEmail { get; set; } = "";
+    [Parameter] public EventCallback<Registration> OnRegister { get; set; }
+    private Registration model = new();
+    private int previousId = -1;
+    protected override void OnParametersSet() {
+        if (previousId == EventId) return;
+        previousId = EventId;
+        model = new Registration { EventId = EventId, FullName = InitialName, Email = InitialEmail };
+    }
+    private Task Submit() => OnRegister.InvokeAsync(model);
+}

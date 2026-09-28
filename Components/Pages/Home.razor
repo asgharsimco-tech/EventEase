@@ -1,0 +1,15 @@
+@page "/"
+@inject EventStore Store
+<PageTitle>Discover events | EventEase</PageTitle>
+<section class="hero"><p class="eyebrow">MAKE YOUR NEXT CONNECTION</p><h1>Great experiences<br />start here.</h1>
+<p>Discover local events, reserve your place, and keep every check-in organised.</p></section>
+<div class="section-heading"><h2>Upcoming events</h2><span>@Store.Events.Count experiences to explore</span></div>
+<label class="search">Search events<input @bind="search" @bind:event="oninput" placeholder="Search by event or location" /></label>
+<div class="grid">
+@foreach (var item in Filtered) { <EventCard @key="item.Id" Event="item" Registered="Store.Count(item.Id)" /> }
+</div>
+@if (!Filtered.Any()) { <p role="status">No matching events. Try another search.</p> }
+@code {
+    private string search = "";
+    private IEnumerable<EventItem> Filtered => Store.Events.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase) || e.Location.Contains(search, StringComparison.OrdinalIgnoreCase));
+}

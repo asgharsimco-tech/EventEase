@@ -1,0 +1,80 @@
+EVENTEASE — STEP-BY-STEP RUN AND SUBMISSION GUIDE
+
+1. DOWNLOAD AND EXTRACT
+Download EventEase-Project.zip and extract it (double-click on Mac; right-click > Extract All on Windows). Open the EventEase folder. You should see EventEase.csproj, Program.cs, README.md, Components, Models, Services, and wwwroot.
+
+2. CHECK .NET
+Open VS Code. Choose File > Open Folder and select the EventEase folder containing EventEase.csproj. Choose Terminal > New Terminal. Enter:
+
+dotnet --list-sdks
+
+If .NET is missing or no 8.0 SDK is listed, install the .NET 8 SDK from:
+https://dotnet.microsoft.com/download/dotnet/8.0
+Choose the installer for your computer. On Mac, use Arm64 for Apple Silicon or x64 for Intel. Restart VS Code after installing.
+
+3. BUILD AND RUN
+In the VS Code terminal, enter these commands one at a time:
+
+dotnet restore
+dotnet build
+dotnet run --urls http://localhost:5075
+
+Wait for "Now listening on: http://localhost:5075" and open that address in your browser. Keep the terminal running. If the port is busy, use 5076 in both the command and browser address.
+
+If you see "Couldn't find a project to run", open the inner EventEase folder containing EventEase.csproj and try again.
+If your SDK does not support the target framework, install the .NET 8 SDK.
+If restore fails, check your connection and retry. Do not upload bin or obj folders produced by the build.
+
+4. TEST THE APP
+- Click Edit event, change a name/location/date, and save.
+- Click View event, then Register for this event.
+- Submit an empty form to check validation.
+- Enter a fictitious name and valid-format email and register.
+- Open Attendance and mark the attendee checked in; check the counters.
+- Open another event's registration page; your profile should fill automatically.
+- Try registering the same email for the same event; it should be rejected.
+- Visit /events/999 and /wrong-page to check error recovery.
+See TEST-CHECKLIST.md for full steps. Do not refresh between navigation tests: this demo intentionally stores state only in the current interactive session.
+
+5. COMPLETE THE REQUIRED MICROSOFT COPILOT ACTIVITY
+Your rubric asks about Microsoft Copilot use. Open the Copilot tool used in your course and follow the prompts in COPILOT-WORKLOG.md. Review its responses, apply appropriate changes, and rerun the build/tests. Record what really happened. Do not submit the blank worklog template as completed evidence.
+
+6. CREATE YOUR PUBLIC GITHUB REPOSITORY
+Sign in at https://github.com. Click + > New repository.
+Repository name: EventEase
+Description: Blazor event management app with registration, session state, and attendance tracking.
+Select Public. Create the repository.
+
+EASIEST UPLOAD METHOD:
+Click "uploading an existing file" on the empty repository page, or Add file > Upload files in an existing repository. Drag the extracted source files AND folders into the upload area. Upload the contents of EventEase, not only the ZIP. Do not upload bin, obj, personal information, or passwords. Click Commit changes.
+
+Include README.md, EventEase.csproj, Program.cs, Components, Models, Services, wwwroot, and the guides. Hidden .gitignore and .github can be added using Git; Git is the most reliable way to preserve the complete folder structure. The .github workflow is optional for the app itself but useful for a compiler check.
+
+OPTIONAL GIT METHOD (preserves all included files):
+Create an EMPTY GitHub repository without initialising a README, license, or .gitignore. In the local EventEase terminal run the following, replacing YOUR-USERNAME with your actual GitHub username:
+
+git init
+git add .
+git commit -m "Initial EventEase project"
+git branch -M main
+git remote add origin https://github.com/YOUR-USERNAME/EventEase.git
+git push -u origin main
+
+Use GitHub's supported sign-in flow when prompted. If Git asks for your identity, configure your own name and email. If you already created files on GitHub, use the browser upload method instead of forcing a push.
+
+7. CHECK YOUR REPOSITORY
+Open https://github.com/YOUR-USERNAME/EventEase and confirm the files are visible. Open it in a signed-out/private browser window to confirm public access. If you uploaded .github/workflows/build.yml, check the Actions tab and resolve any build errors before submitting.
+
+8. FILL THE COURSE SUBMISSION FORM
+Project Title:
+EventEase — Blazor Event Management Application
+
+URL:
+Paste your actual public GitHub repository URL.
+Do not paste a localhost URL, a ZIP download link, or the placeholder YOUR-USERNAME URL.
+
+Copilot Summary:
+Use COPILOT-WORKLOG.md to write a few accurate sentences about your actual Copilot work. Mention generation, routing/debugging, validation/performance, and advanced features. Include the initial ChatGPT assistance if required by your course. Replace all bracketed placeholders.
+
+9. FINAL CHECK AND SUBMIT
+Confirm the project builds, complete the checklist, finish your Copilot summary, verify public repository access, and click the course's Submit button. Follow any additional honour-code or peer-review prompts displayed by the course.
