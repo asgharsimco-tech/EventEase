@@ -44,7 +44,7 @@ Sample events are scheduled relative to the day the app starts. No real attendee
 
 ## Verification status
 
-Source structure, project XML, file references, and packaging were reviewed in the preparation environment. **Compilation and browser behaviour were not verified here because the .NET SDK was unavailable and its download could not be reached.** Run the commands above and follow TEST-CHECKLIST.md before submission. The GitHub Actions build workflow is included for an additional compiler check; a passing build does not replace interactive testing.
+The application was run locally on macOS at http://localhost:5075. The GitHub Actions build passed on 30 September 2026 using .NET 8 in Release configuration. This confirms successful compilation. The full manual checklist in TEST-CHECKLIST.md remains to be completed.
 
 ## Submission
 
