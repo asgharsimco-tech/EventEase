@@ -8,7 +8,7 @@ builder.Services.AddScoped<EventStore>();
 builder.Services.AddScoped<UserSession>();
 var app = builder.Build();
 if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/error");
-app.UseStaticFiles(); app.UseRouting(); app.UseRouting();
+app.UseStaticFiles(); app.UseRouting();
 app.UseAntiforgery();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 app.Run();
