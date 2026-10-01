@@ -3,11 +3,12 @@
 <PageTitle>Event details | EventEase</PageTitle>
 @if (item is null) { <MissingPage /> }
 else {
+    var registered = Store.Count(Id);
     <a href="/">← All events</a>
     <section class="panel"><p class="eyebrow">EVENT DETAILS</p><h1>@item.Name</h1>
     <p>@item.Description</p><dl><dt>When</dt><dd>@item.Date.ToString("dddd, dd MMMM yyyy")</dd>
-    <dt>Where</dt><dd>@item.Location</dd><dt>Available places</dt><dd>@(item.Capacity - Store.Count(Id))</dd></dl>
-    @if (Store.Count(Id) < item.Capacity) { <a class="button" href="@($"/register/{Id}")">Register for this event</a> }
+    <dt>Where</dt><dd>@item.Location</dd><dt>Available places</dt><dd>@(item.Capacity - registered)</dd></dl>
+    @if (registered < item.Capacity) { <a class="button" href="@($"/register/{Id}")">Register for this event</a> }
     else { <p role="status">This event is fully booked.</p> }
     </section>
 }
