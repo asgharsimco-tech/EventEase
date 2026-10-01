@@ -8,11 +8,18 @@
     <button class="secondary" @onclick="StartEdit">Edit event</button></div>
     @if (editing)
     {
+        var nameId = $"event-name-{Event.Id}";
+        var locationId = $"event-location-{Event.Id}";
+        var dateId = $"event-date-{Event.Id}";
+
         <EditForm Model="draft" OnValidSubmit="Save" FormName="event-editor">
             <DataAnnotationsValidator /><ValidationSummary />
-            <label>Name<InputText @bind-Value="draft.Name" /></label>
-            <label>Location<InputText @bind-Value="draft.Location" /></label>
-            <label>Date<InputDate @bind-Value="draft.Date" /></label>
+            <label for="@nameId">Name</label>
+            <InputText id="@nameId" @bind-Value="draft.Name" />
+            <label for="@locationId">Location</label>
+            <InputText id="@locationId" @bind-Value="draft.Location" />
+            <label for="@dateId">Date</label>
+            <InputDate id="@dateId" @bind-Value="draft.Date" />
             <div class="actions"><button type="submit">Save changes</button>
             <button type="button" class="secondary" @onclick="Cancel">Cancel</button></div>
         </EditForm>
