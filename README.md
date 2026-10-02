@@ -18,12 +18,12 @@ Open http://localhost:5075. Keep the terminal open while using the app. Stop wit
 
 | Assignment item | Implementation / remaining action |
 | --- | --- |
-| Public GitHub repository | Upload this folder's contents to your own public repository; see START-HERE.txt. |
-| Event Card with fields and two-way binding | Components/Shared/EventCard.razor uses InputText/InputDate with @bind-Value for name, location, and date, validation, save, and cancel. Complete the required Copilot activity yourself and document it. |
+| Public GitHub repository | https://github.com/asgharsimco-tech/EventEase |
+|  Event Card with fields and two-way binding | EventCard.razor displays name, date and location, with two-way binding, validation, Save and Cancel. Copilot reviewed it and improved label/input accessibility. See COPILOT-WORKLOG.md for the work and manual checks. |
 | Routing and debugging | Routes.razor; /, /events/{Id:int}, /register/{Id:int}, /attendance, /session; missing IDs and unknown addresses show a friendly recovery page. |
 | Performance and validation | In-memory scoped service, stable @key values, no repeated network fetching, bounded inputs, service-level validation, duplicate and capacity checks. This small demo does not claim benchmarked performance gains. |
 | Advanced features | Reusable RegistrationForm, UserSession profile state, attendance filters, check-in toggles, and live counts. |
-| Copilot development summary | COPILOT-WORKLOG.md provides prompts and an honest completion template. No Copilot use is claimed by this package. |
+| Copilot development summary | COPILOT-WORKLOG.md records the Copilot reviews, accessibility changes, EventDetails count optimization, successful builds, and manual checks. The initial project was generated with ChatGPT assistance. |
 
 ## Project structure
 
@@ -44,13 +44,13 @@ Sample events are scheduled relative to the day the app starts. No real attendee
 
 ## Verification status
 
-The application was run locally on macOS at http://localhost:5075. The GitHub Actions build passed on 30 September 2026 using .NET 8 in Release configuration. This confirms successful compilation. The full manual checklist in TEST-CHECKLIST.md remains to be completed.
+The application was run locally on macOS at http://localhost:5075. The GitHub Actions build passed on 1 October 2026 using .NET 8. Manual checks confirmed label focus, event renaming, registration, check-in, and available places changing from 40 to 39. The full TEST-CHECKLIST.md has not been completed.
 
 ## Submission
 
 Your assignment requests a **public GitHub repository URL**, not the ZIP file or a localhost URL. Suggested project title: **EventEase — Blazor Event Management Application**.
 
-This package was generated with ChatGPT assistance. Complete the Microsoft Copilot activities required by your course and record actual prompts, changes, and test results in COPILOT-WORKLOG.md before writing your submission summary. Follow any course rules on acknowledging AI assistance.
+The initial project was generated with ChatGPT assistance. Subsequent Copilot reviews, accessibility improvements, EventDetails count optimization, build results, and manual checks are documented in COPILOT-WORKLOG.md.
 
 ## Technical references
 
